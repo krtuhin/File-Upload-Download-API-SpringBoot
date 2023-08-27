@@ -4,8 +4,7 @@ import com.fileuploadapi.services.FileService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.UUID;
@@ -43,5 +42,16 @@ public class FileServiceImpl implements FileService {
         }
 
         return name;
+    }
+
+    //override method to get file
+    @Override
+    public InputStream getFile(String path, String fileName) throws FileNotFoundException {
+
+        String fullPath = path + File.separator + fileName;
+
+        InputStream is = new FileInputStream(fullPath);
+
+        return is;
     }
 }
